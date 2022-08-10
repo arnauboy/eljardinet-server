@@ -5,7 +5,7 @@ var con = mysql.createConnection({
   host: "localhost",
   user: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
-  database: "eljardinetdb"
+  database: process.env.DATABASE_NAME
 });
 
 con.connect(function(err) {

@@ -11,16 +11,25 @@ var con = mysql.createConnection({
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
-  var sql = "CREATE TABLE bookings (id int AUTO_INCREMENT NOT NULL, start_date DATE NOT NULL, end_date DATE NOT NULL, cost FLOAT(6,2) NOT NULL, PRIMARY KEY (id), CONSTRAINT CHECK (start_date < end_date))";
+
+  var sql = "CREATE TABLE calendar (date DATE NOT NULL, cost FLOAT(7,2) NOT NULL, PRIMARY KEY(date))"
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("Table calendar created");
+  });
+
+  var sql = "CREATE TABLE users (name VARCHAR(255), email VARCHAR(255) NOT NULL, telf VARCHAR(255), PRIMARY KEY (email))";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("Table users created");
+  });
+
+  var sql = "CREATE TABLE bookings (id int AUTO_INCREMENT NOT NULL, email VARCHAR(255) NOT NULL, start_date DATE NOT NULL, end_date DATE NOT NULL, cost FLOAT(7,2) NOT NULL," + 
+    "PRIMARY KEY (id),  FOREIGN KEY (email) REFERENCES users(email), FOREIGN KEY (start_date) REFERENCES calendar(date), FOREIGN KEY (end_date) REFERENCES calendar(date), CONSTRAINT CHECK (start_date < end_date), UNIQUE (start_date,end_date))";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table bookings created");
   });
 
-  var sql = "CREATE TABLE users (name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, telf VARCHAR(255) NOT NULL, PRIMARY KEY (email))";
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log("Table bookings created");
-  });
 });
 
