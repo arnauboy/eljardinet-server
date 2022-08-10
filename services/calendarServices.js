@@ -1,5 +1,13 @@
 var calendarModel = require('../models/calendarModel')
 
+exports.getMonthDays = function(req,res,next) {
+    let month = req.param("month");
+    if (month > 12 || month < 1) res.status(400).send("Wrong month")
+    else {
+        calendarModel.getMonthDays(month,req,res,next);
+    }
+}
+
 exports.createDay = function(req,res,next) {
     if (req.body.cost < 0) {
         res.status(400).send("El preu ha de ser positiu");

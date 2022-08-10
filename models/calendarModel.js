@@ -1,5 +1,18 @@
 var con = require('../utils/database.js')
 
+exports.getMonthDays = function (month,req,res,next) {
+  const query = `SELECT * FROM calendar WHERE MONTH(date)=${month};`;
+  con.query(query, (error, results) => {
+    if (error) {
+      console.log(error);
+      res.status(400).send("Fetching days error")
+    } else {
+      console.log(results);
+      res.status(200).send(JSON.parse(JSON.stringify(results)));
+    }
+  });
+}
+
 exports.dayExists = function (data,req,res,next) {
 
     return new Promise(function(resolve, reject) {
