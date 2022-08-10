@@ -1,5 +1,5 @@
 let mysql = require('mysql')
-require('dotenv').config({ path: '../secrets.env' });
+require('dotenv').config({ path: 'secrets.env' });
 
 var con = mysql.createConnection({
     host: "localhost",
