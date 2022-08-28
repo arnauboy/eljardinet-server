@@ -31,5 +31,10 @@ con.connect(function(err) {
     console.log("Table bookings created");
   });
 
+  var sql = "CREATE TABLE tarifes (name VARCHAR(255) NOT NULL, costPerNight FLOAT(7,2) NOT NULL, n_nights int, PRIMARY KEY (n_nights))"
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("Table tarifes created");
+  });
 });
 

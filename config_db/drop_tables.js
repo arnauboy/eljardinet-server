@@ -11,7 +11,13 @@ var con = mysql.createConnection({
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
-  var sql = "DROP TABLE bookings;";
+  var sql = "DROP TABLE tarifes;";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("Table tarifes dropped");
+  });
+
+   var sql = "DROP TABLE bookings;";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table bookings dropped");
@@ -20,7 +26,13 @@ con.connect(function(err) {
   var sql = "DROP TABLE users;";
   con.query(sql, function (err, result) {
     if (err) throw err;
-    console.log("Table bookings dropped");
+    console.log("Table users dropped");
+  });
+
+  var sql = "DROP TABLE calendar;";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("Table calendar dropped");
   });
 });
 
